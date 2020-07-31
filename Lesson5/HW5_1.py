@@ -40,7 +40,7 @@ except:
     print('Группировка уже выключена')
 sleep(1)
 
-links, last_mail = [], 0
+links, last_mail = set(), 0
 
 while True:
     mails = driver.find_elements_by_class_name('js-letter-list-item')
@@ -52,11 +52,12 @@ while True:
 
     for mail in mails:
         link = mail.get_attribute('href')
-        links.append(link)
+        links.add(link)
     actions = ActionChains(driver)
     actions.move_to_element(last_mail)
     actions.perform()
 
+links = list(links)
 for link in links:
     driver.get(link)
     subject = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, 'thread__subject')))
