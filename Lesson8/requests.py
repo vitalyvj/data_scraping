@@ -3,7 +3,7 @@ from pprint import pprint
 
 client = MongoClient('localhost', 27017)
 
-db = client['instagram']
+db = client.instagram
 
 i, j = 0, 0
 
